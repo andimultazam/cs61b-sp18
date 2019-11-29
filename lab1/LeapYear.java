@@ -1,8 +1,12 @@
 /** Class that determines whether or not a year is a leap year.
- *  @author YOUR NAME HERE
+ *  @author ANDI WAHYU MULTAZAM
  */
 public class LeapYear {
 
+    /** Definition of LeapYear
+     * @param year
+     * @return: true if year divisible by 400 or divisible by 4 and not divisible by 100
+     */
     public static boolean isLeapYear(int year) {
         if ((year%400 == 0) || (year%4 == 0 && year%100 != 0)) {
             return true;
