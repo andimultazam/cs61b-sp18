@@ -49,7 +49,7 @@ public class IntListTest {
     }
 
     @Test
-    public void testDcatenate() {
+    public void testDcatenate1() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
         IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
@@ -58,12 +58,58 @@ public class IntListTest {
     }
 
     @Test
-    public void testCatenate() {
+    public void testDcatenate2() {
+        IntList A = IntList.of(4, 5, 6);
+        IntList B = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(4, 5, 6);
+        assertEquals(exp, IntList.dcatenate(null, B));
+        assertEquals(IntList.of(4, 5, 6), A);
+    }
+
+    @Test
+    public void testDcatenate3() {
+        IntList A = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(4, 5, 6);
+        assertEquals(exp, IntList.dcatenate(A, null));
+        assertEquals(IntList.of(4, 5, 6), A);
+    }
+
+    @Test
+    public void testDcatenate4() {
+        assertEquals(null, IntList.dcatenate(null, null));
+        assertNull(null, null);
+    }
+
+    @Test
+    public void testCatenate1() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
         IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
         assertEquals(exp, IntList.catenate(A, B));
         assertEquals(IntList.of(1, 2, 3), A);
+    }
+
+    @Test
+    public void testCatenate2() {
+        IntList A = null;
+        IntList B = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(4, 5, 6);
+        assertEquals(exp, IntList.catenate(A, B));
+        assertEquals(null, A);
+    }
+
+    @Test
+    public void testCatenate3() {
+        IntList A = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(4, 5, 6);
+        assertEquals(exp, IntList.catenate(A, null));
+        assertEquals(IntList.of(4, 5, 6), A);
+    }
+
+    @Test
+    public void testCatenate4() {
+        assertEquals(null, IntList.catenate(null, null));
+        assertEquals(null, null);
     }
 
 }
