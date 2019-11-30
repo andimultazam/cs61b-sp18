@@ -71,11 +71,49 @@ public class DebugExercise2 {
      *  the result should be 57.
      * */
     public static int sumOfElementwiseMaxes(int[] a, int[] b) {
-        int[] maxes = arrayMax(a, b);
-        int sumofMaxes = arraySum(maxes);
-        return sumofMaxes;
+        int[] maxes = elementWiseMax(a, b);
+        return sumArray(maxes);
     }
 
+    /**
+     * sum element of array
+     * @param arr
+     * @return sum
+     */
+    public static int sumArray(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    /** Rewriting function of finding element-wise max over two array a and b
+     *  if a = {2, 0, 10, 14} and b = {-5, 5, 20, 30}
+     *  then function should return {2, 5, 20, 30}
+     * @param a, b
+     */
+    public static int[] elementWiseMax(int[] a, int[] b) {
+        if (a != null && b != null){
+            if (a.length != b.length) {
+                System.out.println("ERROR: Two arrays doesn't match");
+                return null;
+            }
+        }
+        int[] maxArray = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            maxArray[i] = maxVal(a[i], b[i]);
+        }
+        return maxArray;
+    }
+
+    /** return the max of a and b
+     * @param x, y
+     * @return max
+     */
+    public static int maxVal(int x, int y) {
+        return (y & ((x-y) >> 31) | x & (~(x-y) >> 31));
+    }
 
     public static void main(String[] args) {
         int[] a = {1, 11, -1, -11};
