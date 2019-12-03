@@ -38,8 +38,10 @@ public class Planet {
      * @return distance
      */
     public double calcDistance(Planet p) {
-        double dx = this.xxPos - p.xxPos;
-        double dy = this.yyPos - p.yyPos;
+//        double dx = this.xxPos - p.xxPos;
+//        double dy = this.yyPos - p.yyPos;
+        double dx = p.xxPos - this.xxPos;
+        double dy = p.yyPos - this.yyPos;
         return Math.sqrt(dx*dx + dy*dy);
     }
 
