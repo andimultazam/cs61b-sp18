@@ -4,8 +4,6 @@
  */
 public class NBody {
 
-    public static String backgroundImg = "images/starfield.jpg";
-
     public static double readRadius(String file) {
         In in = new In(file);
 
@@ -52,8 +50,10 @@ public class NBody {
         assert planets != null;
         double[] xForces = new double[planets.length];
         double[] yForces = new double[planets.length];
+        String backgroundImg = "images/starfield.jpg";
 
-        for (int time = 0; time < T; time+=dt) {
+        double time = 0;
+        while(time < T) {
             for (int j = 0; j < planets.length; j++) {
                 xForces[j] = 0;
                 yForces[j] = 0;
@@ -74,6 +74,7 @@ public class NBody {
             }
             StdDraw.show();
             StdDraw.pause(10);
+            time = time + dt;
         }
 
         StdOut.printf("%d\n", planets.length);
