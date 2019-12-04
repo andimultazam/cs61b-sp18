@@ -73,11 +73,9 @@ public class Planet {
         double netForce = 0;
         for (Planet p : planets) {
             if (this == p) {
-                netForce = 0;
+                continue;
             }
-            else {
-                netForce += this.calcForceExertedByX(p);
-            }
+            netForce += this.calcForceExertedByX(p);
         }
         return netForce;
      }
@@ -86,11 +84,9 @@ public class Planet {
         double netForce = 0;
         for (Planet p : planets) {
             if (this == p) {
-                netForce = 0;
+                continue;
             }
-            else {
-                netForce += this.calcForceExertedByY(p);
-            }
+            netForce += this.calcForceExertedByY(p);
         }
         return netForce;
     }
