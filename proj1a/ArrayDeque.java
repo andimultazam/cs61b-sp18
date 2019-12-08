@@ -54,7 +54,7 @@ public class ArrayDeque<T> {
         int ptr = (nextFirst+1)%items.length;
         int edge = nextLast-1;
         do {
-            System.out.print(items[ptr] + " ");
+            System.out.println(items[ptr]);
             ptr = (ptr+1)%items.length;
         } while (ptr != edge);
         System.out.println(items[ptr]);
@@ -80,15 +80,7 @@ public class ArrayDeque<T> {
 
     public int size() { return size; }
 
-    public int getCurrentFirst() {
-        return (nextFirst+1)%items.length;
-    }
-
-    public int getNextIndex(int curIndex) {
-        return (curIndex+1)%items.length;
-    }
-
     public T get(int index) {
-        return items[index];
+        return items[index%size];
     }
 }
