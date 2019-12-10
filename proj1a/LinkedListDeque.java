@@ -16,13 +16,15 @@ public class LinkedListDeque<T> {
     private int size;
 
     public LinkedListDeque() {
-        sentinel = new ItemNode(null, sentinel, sentinel);
+        sentinel = new ItemNode(null, null, null);
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
         size = 0;
     }
 
     public void addFirst(T item) {
         sentinel.next = new ItemNode(item, sentinel.next, sentinel);
-        sentinel.prev = sentinel.next;
+        sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
 
@@ -42,7 +44,6 @@ public class LinkedListDeque<T> {
             System.out.println(p.item);
             p = p.next;
         }
-        System.out.println();
     }
 
     public T removeFirst() {
