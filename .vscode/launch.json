@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - BasicInDemo",
+            "request": "launch",
+            "mainClass": "BasicInDemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestCalcForceExertedBy",
+            "request": "launch",
+            "mainClass": "TestCalcForceExertedBy"
+        }
+    ]
+}
