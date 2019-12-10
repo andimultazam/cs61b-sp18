@@ -7,7 +7,7 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 1;
+        nextFirst = 4;
         nextLast = nextFirst + 1;
     }
 
@@ -61,8 +61,11 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         int curFirst = (nextFirst + 1) % items.length;
-        T x = get(curFirst);
+        T x = get(0);
         items[curFirst] = null;
         nextFirst = curFirst;
         size -= 1;
@@ -70,9 +73,12 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         int curLast = (((nextLast - 1) % items.length) + items.length) % items.length;
-        T x = get(curLast);
-        items[size] = null;
+        T x = getLast();
+        items[curLast] = null;
         nextLast = curLast;
         size -= 1;
         return x;
@@ -82,7 +88,13 @@ public class ArrayDeque<T> {
         return size;
     }
 
+    private T getLast() {
+        int curLast = (((nextLast - 1) % items.length) + items.length) % items.length;
+        return items[curLast];
+    }
+
     public T get(int index) {
-        return items[index % size];
+        int cirIndex = (((nextFirst+1)%items.length) + index)%items.length;
+        return items[cirIndex];
     }
 }
