@@ -31,17 +31,23 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        int curLast = (((nextLast - 1) % size) + size) % size;
-        int curFirst = (nextFirst + 1) % size;
+        int curLast = (((nextLast - 1) % items.length) + items.length) % items.length;
+        int curFirst = (nextFirst + 1) % items.length;
 
         if (curLast > curFirst) {
-            System.arraycopy(items, 0, a, 0, curLast + 1);
-            nextFirst = a.length - 1;
-            nextLast = size;
+            if (a.length < items.length) {
+                System.arraycopy(items, curFirst, a, 0, (curLast - curFirst) + 1);
+                nextFirst = capacity - 1;
+                nextLast = (curLast - curFirst) + 1;
+            } else {
+                System.arraycopy(items, curFirst, a, 0, (curLast - curFirst) + 1);
+                nextFirst = capacity - 1;
+                nextLast = items.length;
+            }
         } else {
-            System.arraycopy(items, curFirst, a, a.length - (size - curFirst), size - curFirst);
+            System.arraycopy(items, curFirst, a, capacity - (items.length - curFirst), items.length - curFirst);
             System.arraycopy(items, 0, a, 0, curLast + 1);
-            nextFirst += size;
+            nextFirst = (nextFirst + items.length) % capacity;
         }
         items = a;
     }
@@ -64,6 +70,9 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
+        if ((double) size / (items.length) < 0.25 && items.length >= 16) {
+            resize((int) (0.25 * items.length));
+        }
         int curFirst = (nextFirst + 1) % items.length;
         T x = get(0);
         items[curFirst] = null;
@@ -75,6 +84,9 @@ public class ArrayDeque<T> {
     public T removeLast() {
         if (size == 0) {
             return null;
+        }
+        if ((double) size / (items.length) < 0.25 && items.length >= 16) {
+            resize((int) (0.25 * items.length));
         }
         int curLast = (((nextLast - 1) % items.length) + items.length) % items.length;
         T x = getLast();
@@ -94,7 +106,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        int cirIndex = (((nextFirst+1)%items.length) + index)%items.length;
+        int cirIndex = (((nextFirst + 1) % items.length) + index) % items.length;
         return items[cirIndex];
     }
 }
