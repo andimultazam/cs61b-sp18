@@ -45,7 +45,8 @@ public class ArrayDeque<T> {
                 nextLast = items.length;
             }
         } else {
-            System.arraycopy(items, curFirst, a, capacity - (items.length - curFirst), items.length - curFirst);
+            int len = items.length - curFirst;
+            System.arraycopy(items, curFirst, a, capacity - len, len);
             System.arraycopy(items, 0, a, 0, curLast + 1);
             nextFirst = (nextFirst + items.length) % capacity;
         }
