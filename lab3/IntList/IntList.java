@@ -1,3 +1,5 @@
+package IntList;
+
 import java.util.Formatter;
 
 /**
@@ -132,7 +134,39 @@ public class IntList {
      * @return reverse version of A.
      */
     public static IntList reverse(IntList A) {
-        return null;
+        if (A.rest == null) {
+            return A;
+        }
+        IntList current = A;
+        IntList prev = null;
+        while (A.rest != null) {
+            current = A;
+            A = A.rest;
+            current.rest = prev;
+            prev = current;
+        }
+        A.rest = current;
+        return A;
+    }
+
+    /**
+     * reverse the list using recursion
+     * @param A input
+     * @return reverse version of A
+     */
+    public static IntList reverseRecursive(IntList A) {
+        return reverseRecursiveHelper(A);
+    }
+
+    private static IntList reverseRecursiveHelper(IntList front) {
+        if (front == null || front.rest == null) {
+            return front;
+        } else {
+            IntList reversed = reverseRecursiveHelper(front.rest);
+            front.rest.rest = front;
+            front.rest = null;
+            return reversed;
+        }
     }
 
 
